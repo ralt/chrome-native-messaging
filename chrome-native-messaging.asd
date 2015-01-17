@@ -3,6 +3,7 @@
   :author "Florian Margaine <florian@margaine.com>"
   :license "MIT License"
   :serial t
+  :depends-on ("trivial-utf-8")
   :components ((:file "package")
                (:file "read")
                (:file "send")))

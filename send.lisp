@@ -2,11 +2,12 @@
 
 (defun send-to-ext (string output-stream)
   "Sends a string to the extension. Usually, output-stream is *standard-output*."
-  (let ((len (length string)))
+  (let ((len (length string))
+	(utf-8-string (trivial-utf-8:string-to-utf-8-bytes string)))
     (dolist (byte (integer-to-bytes len))
       (write-byte byte output-stream))
-    (dolist (byte (coerce string 'list))
-      (write-byte (char-code byte) output-stream)))
+    (dolist (byte (coerce utf-8-string 'list))
+      (write-byte byte output-stream)))
   (force-output output-stream))
 
 (defun integer-to-bytes (integer)
