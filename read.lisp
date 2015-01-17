@@ -7,9 +7,13 @@
 
 (defun read-stdin-as-string (stream length)
   "Helper function to read *standard-input* as a string"
-  (let ((string (make-string length)))
-    (read-sequence string stream)
-    string))
+  (format
+   nil
+   "~{~C~}"
+   (mapcar
+    #'code-char
+    (loop for c from 1 to length
+       collect (read-byte stream)))))
 
 (defun read-length (stream)
   "Reads the length of the message from the first 4 bytes"
